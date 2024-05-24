@@ -24,7 +24,7 @@ defmodule LocalMixProject.MixProject do
 
   defp aliases do
     [
-      "iex.watch": ["cmd ./iex_watch.sh"]
+      iex: ["cmd iex -S mix run --no-halt -r ./iex_helpers.exs"]
     ]
   end
 end

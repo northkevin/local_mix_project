@@ -4,7 +4,7 @@ run_script() {
   script_path=~/dev/local_mix_project/scripts/$script_name
 
   if [[ -f $script_path ]]; then
-    iex --no-pry -S mix run $script_path
+    mix run $script_path
   else
     echo "Script $script_name not found!"
   fi

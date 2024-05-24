@@ -1,4 +1,5 @@
 {
   "root": ".",
-  "ignore_dirs": ["_build", "deps", "priv"]
+  "prefer_split_fsevents_watcher": true,
+  "ignore_dirs": [".git", "_build", ".elixir_ls", ".vscode", "deps", "priv"]
 }
