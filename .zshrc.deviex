@@ -1,0 +1,13 @@
+# Auto-completion for running scripts in the scripts folder
+run_script() {
+  script_name=$1
+  script_path=~/dev/local_mix_project/scripts/$script_name
+
+  if [[ -f $script_path ]]; then
+    iex --no-pry -S mix run $script_path
+  else
+    echo "Script $script_name not found!"
+  fi
+}
+
+compdef '_files -W ~/dev/local_mix_project/scripts' run_script

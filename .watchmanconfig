@@ -1,0 +1,4 @@
+{
+  "root": ".",
+  "ignore_dirs": ["_build", "deps", "priv"]
+}
