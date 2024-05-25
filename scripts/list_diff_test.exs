@@ -1,24 +1,23 @@
-# IExHelpers.run_script("list_diff_test.exs")
+# import_file("scripts/list_diff_test.exs")
 
-# list_diff_test.exs
 # Sample data
-existing_ids = Enum.to_list(1..1000)
-new_access_level_ids = Enum.to_list(500..1500)
+existing_ids = Enum.to_list(1..10000)
+new_access_level_ids = Enum.to_list(500..15000)
 
-# Measure performance of diff_lists
-# {time_1, result_1} =
-#   :timer.tc(fn -> LocalMixProject.ListDiff.diff_lists(existing_ids, new_access_level_ids) end)
+# Before
+{time_1, _result_1} =
+  :timer.tc(fn ->
+    Enum.filter(existing_ids, &(&1 not in new_access_level_ids))
+    Enum.filter(new_access_level_ids, &(&1 not in existing_ids))
+  end)
 
-# IO.puts("diff_lists took #{time_1} microseconds")
+IO.puts("Before took #{time_1 / 1_000_000} seconds")
 
-# # Measure performance of diff_lists_2
-# {time_2, result_2} =
-#   :timer.tc(fn -> LocalMixProject.ListDiff..diff_lists_2(existing_ids, new_access_level_ids) end)
+# After
+{time_2, _result_2} =
+  :timer.tc(fn ->
+    existing_ids -- new_access_level_ids
+    new_access_level_ids -- existing_ids
+  end)
 
-# IO.puts("diff_lists_2 took #{time_2} microseconds")
-
-# # Measure performance of diff_lists_3
-# {time_3, result_3} =
-#   :timer.tc(fn -> LocalMixProject.ListDiff..diff_lists_2(existing_ids, new_access_level_ids) end)
-
-# IO.puts("diff_lists_3 took #{time_3} microseconds")
+IO.puts("After took #{time_2 / 1_000_000} seconds")
